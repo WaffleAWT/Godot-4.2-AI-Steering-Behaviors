@@ -1,0 +1,40 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1701348193
+icon.svg::CompressedTexture2D::3288295531917573153::1700705741::1700705752::1::::<><>::
+::res://Art/::1701348175
+Fly.png::CompressedTexture2D::5324990314286550740::1700968682::1700968925::1::::<><>::
+Goblin Idle.png::CompressedTexture2D::8896865743662030043::1700968562::1700968925::1::::<><>::
+Goblin Run.png::CompressedTexture2D::2928831399053057436::1700968583::1700968925::1::::<><>::
+Ground.png::CompressedTexture2D::1209530503994577715::1700969153::1700969154::1::::<><>::
+Light.png::CompressedTexture2D::7719460930867250094::1700811802::1700811803::1::::<><>::
+Player Idle.png::CompressedTexture2D::5780605125757804053::1700968650::1700968925::1::::<><>::
+Player Run.png::CompressedTexture2D::3793864460634509606::1700968651::1700968925::1::::<><>::
+Slime Idle.png::CompressedTexture2D::8856343129465590667::1700968782::1700968925::1::::<><>::
+Slime Run.png::CompressedTexture2D::4099000311124301718::1700968783::1700968925::1::::<><>::
+Sword.png::CompressedTexture2D::6031312764360590951::1700968720::1700968925::1::::<><>::
+::res://Scenes/::1701348175
+::res://Scenes/Characters/::1701348175
+goblin.tscn::PackedScene::6880028711900213318::1701181267::0::1::::<><>::uid://dy0ycxjbn4iml::::res://Art/Goblin Idle.png<>res://Scripts/Characters/Goblin/goblin.gd<>uid://bhy0optost21e::::res://Art/Goblin Run.png<>uid://bsidvydors27e::::res://Scenes/Components/soft_collision.tscn<>uid://cr6u3tdb713nn::::res://Art/Sword.png<>uid://mrulv0ahk8ci::::res://Scenes/Components/enemy_detection_zone.tscn<>res://Scripts/Data/state_machine.gd<>res://Scripts/Characters/Goblin/idle.gd<>res://Scripts/Characters/Goblin/seek.gd<>res://Scripts/Characters/Goblin/chase.gd<>res://Scripts/Characters/Goblin/attack.gd
+player.tscn::PackedScene::9093439590853746146::1701058233::0::1::::<><>::res://Scripts/Characters/Player/player.gd<>uid://cr6u3tdb713nn
+::res://Scenes/Components/::1701348175
+enemy_detection_zone.tscn::PackedScene::878595670683936976::1701059323::0::1::::<><>::res://Scripts/Characters/Components/enemy_detection_zone.gd
+soft_collision.tscn::PackedScene::3666555809714834512::1701053989::0::1::::<><>::res://Scripts/Components/soft_collision.gd
+::res://Scenes/Levels/::1701348175
+prototype.tscn::PackedScene::2967998642948980029::1701181881::0::1::::<><>::uid://rh515benq6bf::::res://Art/Ground.png<>uid://c5a0cki5ijvde::::res://Scenes/Characters/goblin.tscn
+::res://Scripts/::1701348176
+::res://Scripts/Characters/::1701348176
+::res://Scripts/Characters/Components/::1701348175
+enemy_detection_zone.gd::GDScript::-1::1701059322::0::1::::<>Area2D<>::
+::res://Scripts/Characters/Goblin/::1701348176
+attack.gd::GDScript::-1::1701057848::0::1::::<>State<>::
+chase.gd::GDScript::-1::1701057912::0::1::::<>State<>::
+goblin.gd::GDScript::-1::1701180792::0::1::::<>CharacterBody2D<>::
+idle.gd::GDScript::-1::1701058007::0::1::::<>State<>::
+seek.gd::GDScript::-1::1701181881::0::1::::<>State<>::
+::res://Scripts/Characters/Player/::1701348176
+player.gd::GDScript::-1::1701058215::0::1::::<>CharacterBody2D<>::
+::res://Scripts/Components/::1701348176
+soft_collision.gd::GDScript::-1::1701053988::0::1::::<>Area2D<>::
+::res://Scripts/Data/::1701348176
+state.gd::GDScript::-1::1700975897::0::1::::State<>Node<>::
+state_machine.gd::GDScript::-1::1700975909::0::1::::StateMachine<>Node<>::

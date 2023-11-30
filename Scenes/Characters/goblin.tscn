@@ -1,0 +1,281 @@
+[gd_scene load_steps=33 format=3 uid="uid://c5a0cki5ijvde"]
+
+[ext_resource type="Texture2D" uid="uid://dy0ycxjbn4iml" path="res://Art/Goblin Idle.png" id="1_f86tp"]
+[ext_resource type="Script" path="res://Scripts/Characters/Goblin/goblin.gd" id="1_oc8iv"]
+[ext_resource type="Texture2D" uid="uid://bhy0optost21e" path="res://Art/Goblin Run.png" id="2_54s4k"]
+[ext_resource type="PackedScene" uid="uid://bsidvydors27e" path="res://Scenes/Components/soft_collision.tscn" id="2_eioj5"]
+[ext_resource type="Texture2D" uid="uid://cr6u3tdb713nn" path="res://Art/Sword.png" id="2_qhgxg"]
+[ext_resource type="PackedScene" uid="uid://mrulv0ahk8ci" path="res://Scenes/Components/enemy_detection_zone.tscn" id="4_7vfe3"]
+[ext_resource type="Script" path="res://Scripts/Data/state_machine.gd" id="5_51gbc"]
+[ext_resource type="Script" path="res://Scripts/Characters/Goblin/idle.gd" id="6_lfbhb"]
+[ext_resource type="Script" path="res://Scripts/Characters/Goblin/seek.gd" id="7_aiagq"]
+[ext_resource type="Script" path="res://Scripts/Characters/Goblin/chase.gd" id="8_hhpuq"]
+[ext_resource type="Script" path="res://Scripts/Characters/Goblin/attack.gd" id="9_lqiov"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pygpp"]
+radius = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhgsd"]
+atlas = ExtResource("1_f86tp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6akok"]
+atlas = ExtResource("1_f86tp")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1mu5"]
+atlas = ExtResource("1_f86tp")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jci7u"]
+atlas = ExtResource("1_f86tp")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ns580"]
+atlas = ExtResource("1_f86tp")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1sym8"]
+atlas = ExtResource("1_f86tp")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6rxv"]
+atlas = ExtResource("2_54s4k")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqx46"]
+atlas = ExtResource("2_54s4k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7xve"]
+atlas = ExtResource("2_54s4k")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3jou"]
+atlas = ExtResource("2_54s4k")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ve7x5"]
+atlas = ExtResource("2_54s4k")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7454q"]
+atlas = ExtResource("2_54s4k")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cyen8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhgsd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6akok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s1mu5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jci7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ns580")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1sym8")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6rxv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kqx46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7xve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3jou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ve7x5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7454q")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_77t08"]
+radius = 3.0
+height = 10.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ojg3w"]
+radius = 128.0
+
+[sub_resource type="Animation" id="Animation_fs8kk"]
+resource_name = "AttackFlip"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -3.14159, -3.14159, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_8i4tu"]
+resource_name = "AttackNoFlip"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 3.14159, 3.14159, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_gr4bc"]
+resource_name = "Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_yv6y7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.14159]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ms2od"]
+_data = {
+"AttackFlip": SubResource("Animation_fs8kk"),
+"AttackNoFlip": SubResource("Animation_8i4tu"),
+"Idle": SubResource("Animation_gr4bc"),
+"RESET": SubResource("Animation_yv6y7")
+}
+
+[node name="Goblin" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_oc8iv")
+
+[node name="SoftCollision" parent="." instance=ExtResource("2_eioj5")]
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+visible = false
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_pygpp")
+
+[node name="Sword" type="Node2D" parent="."]
+rotation = 3.14159
+
+[node name="Sprite2D" type="Sprite2D" parent="Sword"]
+position = Vector2(0, -9)
+texture = ExtResource("2_qhgxg")
+flip_h = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cyen8")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_77t08")
+
+[node name="CollisionRays" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="CollisionRays"]
+visible = false
+target_position = Vector2(64, 0)
+
+[node name="RayCast2D2" type="RayCast2D" parent="CollisionRays"]
+visible = false
+position = Vector2(0, 4)
+target_position = Vector2(64, 0)
+
+[node name="RayCast2D3" type="RayCast2D" parent="CollisionRays"]
+visible = false
+position = Vector2(0, -4)
+target_position = Vector2(64, 0)
+
+[node name="EnemyDetectionZone" parent="." instance=ExtResource("4_7vfe3")]
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="EnemyDetectionZone" index="0"]
+visible = false
+shape = SubResource("CircleShape2D_ojg3w")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("5_51gbc")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("6_lfbhb")
+
+[node name="Timer" type="Timer" parent="StateMachine/Idle"]
+one_shot = true
+
+[node name="Seek" type="Node" parent="StateMachine"]
+script = ExtResource("7_aiagq")
+
+[node name="Timer" type="Timer" parent="StateMachine/Seek"]
+one_shot = true
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("8_hhpuq")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("9_lqiov")
+
+[node name="Timer" type="Timer" parent="StateMachine/Attack"]
+one_shot = true
+
+[node name="SwordAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ms2od")
+}
+autoplay = "Idle"
+
+[connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Seek/Timer" to="StateMachine/Seek" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Attack/Timer" to="StateMachine/Attack" method="_on_timer_timeout"]
+
+[editable path="SoftCollision"]
+[editable path="EnemyDetectionZone"]
